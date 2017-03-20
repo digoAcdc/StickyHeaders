@@ -1,10 +1,13 @@
 package br.com.heiderlopes.stickyheaders.adapter.stickyheader;
 
 import android.annotation.SuppressLint;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -14,17 +17,33 @@ import br.com.heiderlopes.stickyheaders.model.Person;
 
 public class AddressBookDemoAdapter extends SectioningAdapter {
 
+    private List<Person> people;
+    private ArrayList<Section> sections = new ArrayList<>();
+
     public  class Section {
         String alpha;
-        ArrayList<Person> people = new ArrayList<>();
+        List<Person> people = new ArrayList<>();
+
+        public List<Person> getPeople() {
+            return people;
+        }
     }
 
-    public class ItemViewHolder extends SectioningAdapter.ItemViewHolder {
+    public class ItemViewHolder extends SectioningAdapter.ItemViewHolder implements View.OnClickListener {
         TextView personNameTextView;
 
         public ItemViewHolder(View itemView) {
             super(itemView);
             personNameTextView = (TextView) itemView.findViewById(R.id.personNameTextView);
+            personNameTextView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            int adapterPosition = getAdapterPosition();
+            final int section = AddressBookDemoAdapter.this.getSectionForAdapterPosition(adapterPosition);
+            final int item = AddressBookDemoAdapter.this.getPositionOfItemInSection(section, adapterPosition);
+            clicado(section, item);
         }
     }
 
@@ -37,14 +56,20 @@ public class AddressBookDemoAdapter extends SectioningAdapter {
         }
     }
 
-
-    List<Person> people;
-    ArrayList<Section> sections = new ArrayList<>();
+    void clicado(int sectionIndex, int itemIndex) {
+        Log.d("", "onCloneItem() called with: " + "sectionIndex = [" + sectionIndex + "], itemIndex = [" + itemIndex + "]");
+        Section s = sections.get(sectionIndex);
+        Person p = s.getPeople().get(itemIndex);
+        notifySectionItemInserted(sectionIndex, itemIndex + 1);
+    }
 
     public AddressBookDemoAdapter() {
 
     }
 
+    public Section getPerson(int pos) {
+        return sections.get(pos);
+    }
     public void setPeople(List<Person> people) {
         this.people = people;
 
