@@ -2,7 +2,6 @@ package br.com.heiderlopes.stickyheaders;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +14,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = MainActivity.class.getSimpleName();
     AddressBookDemoAdapter adapter = new AddressBookDemoAdapter();
+
 
     private RecyclerView recyclerView;
     @Override
@@ -56,7 +56,12 @@ public class MainActivity extends AppCompatActivity {
         persons.add(new Person("Camila"));
         persons.add(new Person("Camila"));
 
+
+        persons.add(new Person("Andreia"));
+
         adapter.setPeople(persons);
+        //recyclerView.setAdapter(adapter);
+
         recyclerView.setAdapter(adapter);
     }
 }

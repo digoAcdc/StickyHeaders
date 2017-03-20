@@ -5,8 +5,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import br.com.heiderlopes.stickyheaders.R;
@@ -14,7 +14,7 @@ import br.com.heiderlopes.stickyheaders.model.Person;
 
 public class AddressBookDemoAdapter extends SectioningAdapter {
 
-    private class Section {
+    public  class Section {
         String alpha;
         ArrayList<Person> people = new ArrayList<>();
     }
@@ -42,15 +42,22 @@ public class AddressBookDemoAdapter extends SectioningAdapter {
     ArrayList<Section> sections = new ArrayList<>();
 
     public AddressBookDemoAdapter() {
+
     }
 
     public void setPeople(List<Person> people) {
         this.people = people;
+
+        Collections.sort(people, Person.PersonNameComparator);
+
         sections.clear();
-        // sort people into buckets by the first letter of last name
+
         char alpha = 0;
+
         Section currentSection = null;
+
         for (Person person : people) {
+
             if (person.getNome().charAt(0) != alpha) {
                 if (currentSection != null) {
                     sections.add(currentSection);
