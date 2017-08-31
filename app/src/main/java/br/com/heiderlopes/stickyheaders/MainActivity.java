@@ -1,7 +1,7 @@
 package br.com.heiderlopes.stickyheaders;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Toast;
@@ -14,6 +14,10 @@ import br.com.heiderlopes.stickyheaders.adapter.stickyheader.ClickListener;
 import br.com.heiderlopes.stickyheaders.adapter.stickyheader.RecyclerTouchListener;
 import br.com.heiderlopes.stickyheaders.adapter.stickyheader.StickyHeaderLayoutManager;
 import br.com.heiderlopes.stickyheaders.model.Person;
+
+/**
+ * Created by heider on 22/03/17.
+ */
 
 public class MainActivity extends AppCompatActivity {
 
